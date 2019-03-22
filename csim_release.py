@@ -31,8 +31,15 @@ def run_windeployqt():
 
 def copy_rotations():
     src_path = (REPO_ROOT / "Rotation" / "Rotations")
+    class_directories = {
+        "Hunter",
+        "Rogue",
+        "Warrior",
+    }
     shutil.rmtree(str(RELEASE_DIR / "Rotations"))
-    shutil.copytree(src=str(REPO_ROOT / "Rotation" / "Rotations"), dst=str(RELEASE_DIR / "Rotations"))
+    for directory in class_directories:
+        shutil.copytree(src=str(src_path / directory), dst=str(RELEASE_DIR / "Rotations" / directory))
+    shutil.copy2(src=str(src_path / "rotation_paths.xml"), dst=str(RELEASE_DIR / "rotation_paths.xml"))
 
 
 def copy_items():
