@@ -7,10 +7,10 @@ import sys
 import tarfile
 
 
-QT_ROOT = pathlib.Path("G:/", "Qt", "5.11.0", "mingw53_32", "bin")
+QT_ROOT = pathlib.Path("C:/", "Qt", "5.11.3", "mingw53_32", "bin")
 REPO_ROOT = pathlib.Path("C:/", "C++", "ClassicSim")
 QML_DIR = REPO_ROOT / "QML"
-ARCHIVE_PATH = pathlib.Path("C:/", "C++", "build-ClassicSim-Desktop_Qt_5_11_0_MinGW_32bit-Release")
+ARCHIVE_PATH = pathlib.Path("C:/", "C++", "build-ClassicSim-Desktop_Qt_5_11_3_MinGW_32bit-Release")
 RELEASE_DIR = ARCHIVE_PATH / "release"
 
 
@@ -35,10 +35,15 @@ def copy_rotations():
         "Hunter",
         "Rogue",
         "Warrior",
+        "Paladin",
     }
-    shutil.rmtree(str(RELEASE_DIR / "Rotations"))
+
+    dest_dir = RELEASE_DIR / "Rotations"
+    if dest_dir.exists():
+        shutil.rmtree(str(dest_dir))
+
     for directory in class_directories:
-        shutil.copytree(src=str(src_path / directory), dst=str(RELEASE_DIR / "Rotations" / directory))
+        shutil.copytree(src=str(src_path / directory), dst=str(dest_dir / directory))
     shutil.copy2(src=str(src_path / "rotation_paths.xml"), dst=str(RELEASE_DIR / "rotation_paths.xml"))
 
 
@@ -57,8 +62,11 @@ def copy_items():
         "Wrists",
     }
     for directory in item_directories:
-        shutil.rmtree(str(RELEASE_DIR / directory))
-        shutil.copytree(src=str(source / directory), dst=str(RELEASE_DIR / directory))
+        dest_dir = RELEASE_DIR / directory
+        if dest_dir.exists():
+            shutil.rmtree(str(dest_dir))
+
+        shutil.copytree(src=str(source / directory), dst=str(dest_dir))
 
     shutil.copy2(src=str(source / "equipment_paths.xml"),
                  dst=str(RELEASE_DIR / "equipment_paths.xml"))
@@ -74,8 +82,10 @@ def copy_license_files():
 
 
 def clear_saves():
-    shutil.rmtree(str(RELEASE_DIR / "Saves"))
-    os.mkdir(str(RELEASE_DIR / "Saves"))
+    dest_dir = RELEASE_DIR / "Saves"
+    if dest_dir.exists():
+        shutil.rmtree(str(dest_dir))
+    os.mkdir(str(dest_dir))
 
 
 def tar_application():
