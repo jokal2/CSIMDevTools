@@ -18,6 +18,7 @@ def copy_rotations():
         "Rogue",
         "Warrior",
         "Paladin",
+        "Shaman",
     }
     shutil.rmtree(str(DEBUG_DIR / "Rotations"))
     for directory in class_directories:
