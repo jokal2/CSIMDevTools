@@ -20,7 +20,8 @@ def copy_rotations():
         "Paladin",
         "Shaman",
     }
-    shutil.rmtree(str(DEBUG_DIR / "Rotations"))
+    if (DEBUG_DIR / "Rotations").exists():
+        shutil.rmtree(str(DEBUG_DIR / "Rotations"))
     for directory in class_directories:
         shutil.copytree(src=str(src_path / directory), dst=str(DEBUG_DIR / "Rotations" / directory))
     shutil.copy2(src=str(src_path / "rotation_paths.xml"), dst=str(DEBUG_DIR / "rotation_paths.xml"))
@@ -41,7 +42,8 @@ def copy_items():
         "Wrists",
     }
     for directory in item_directories:
-        shutil.rmtree(str(DEBUG_DIR / directory))
+        if (DEBUG_DIR / directory).exists():
+            shutil.rmtree(str(DEBUG_DIR / directory))
         shutil.copytree(src=str(source / directory), dst=str(DEBUG_DIR / directory))
 
     shutil.copy2(src=str(source / "equipment_paths.xml"),
