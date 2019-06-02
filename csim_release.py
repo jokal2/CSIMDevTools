@@ -122,7 +122,7 @@ def tar_application():
 
         return files_to_archive
 
-    files_to_archive = _get_files_to_archive()
+    files_to_archive = _get_files_to_archive() + [RELEASE_DIR / "Saves"]
 
     tar_name = _get_tar_name()
     with tarfile.open("{tar_name}.tar.gz".format(tar_name=tar_name), "x:gz") as tar:
