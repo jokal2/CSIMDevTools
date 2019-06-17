@@ -19,6 +19,7 @@ def copy_rotations():
         "Warrior",
         "Paladin",
         "Shaman",
+        "Mage",
     }
     if (DEBUG_DIR / "Rotations").exists():
         shutil.rmtree(str(DEBUG_DIR / "Rotations"))

@@ -37,6 +37,7 @@ def copy_rotations():
         "Warrior",
         "Paladin",
         "Shaman",
+        "Mage",
     }
 
     dest_dir = RELEASE_DIR / "Rotations"
