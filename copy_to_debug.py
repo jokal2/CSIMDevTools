@@ -9,6 +9,7 @@ DEBUG_DIR = pathlib.Path("C:/", "C++", "build-ClassicSim-Desktop_Qt_5_11_3_MinGW
 def main():
     copy_rotations()
     copy_items()
+    create_saves()
 
 
 def copy_rotations():
@@ -52,6 +53,10 @@ def copy_items():
     shutil.copy2(src=str(source / "set_bonuses.xml"),
                  dst=str(DEBUG_DIR / "set_bonuses.xml"))
 
+
+def create_saves():
+    if not (DEBUG_DIR / "Saves").exists():
+        os.mkdir((DEBUG_DIR / "Saves"))
 
 
 if __name__ == "__main__":
