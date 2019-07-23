@@ -21,10 +21,17 @@ def copy_rotations():
         "Paladin",
         "Shaman",
         "Mage",
+        "Druid",
+        "Priest",
+        "Warlock",
     }
     if (DEBUG_DIR / "Rotations").exists():
         shutil.rmtree(str(DEBUG_DIR / "Rotations"))
     for directory in class_directories:
+        if not (src_path / directory).exists():
+            print("Skipping " + directory + " because source does not exist")
+            continue
+
         shutil.copytree(src=str(src_path / directory), dst=str(DEBUG_DIR / "Rotations" / directory))
     shutil.copy2(src=str(src_path / "rotation_paths.xml"), dst=str(DEBUG_DIR / "rotation_paths.xml"))
 
